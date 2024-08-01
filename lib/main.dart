@@ -1,9 +1,13 @@
+import 'dart:async';
 import 'dart:io';
-
 import 'package:crypto/repositories/crypto_coins/crypto_coins.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:talker/talker.dart';
+import 'package:talker_bloc_logger/talker_bloc_logger.dart';
+import 'package:talker_dio_logger/talker_dio_logger.dart';
 import 'crypto_coins_list_app.dart';
 
 class MyHttpOverrides extends HttpOverrides {
@@ -16,7 +20,29 @@ class MyHttpOverrides extends HttpOverrides {
 }
 
 void main() {
-  GetIt.I.registerLazySingleton(() => CryptoCoinsRepository(dio: Dio()));
+  final talker = Talker();
+  GetIt.I.registerSingleton(talker);
+  GetIt.I<Talker>().debug("Crypto application started!");
+
+  FlutterError.onError =
+      (details) => GetIt.I<Talker>().handle(details.exception, details.stack);
+
+  final dio = Dio();
+  dio.interceptors.add(
+    TalkerDioLogger(
+        talker: talker,
+        settings: const TalkerDioLoggerSettings(printResponseData: false)),
+  );
+
+  GetIt.I.registerLazySingleton(() => CryptoCoinsRepository(dio: dio));
+
+  Bloc.observer = TalkerBlocObserver(
+      talker: talker,
+      settings: const TalkerBlocLoggerSettings(
+          printStateFullData: false, printEventFullData: false));
+
   HttpOverrides.global = MyHttpOverrides();
-  runApp(const Crypto());
+
+  runZonedGuarded(
+      () => runApp(const Crypto()), (e, st) => GetIt.I<Talker>().handle(e, st));
 }

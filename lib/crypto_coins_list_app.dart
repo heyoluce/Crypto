@@ -1,6 +1,7 @@
 import 'package:crypto/router/router.dart';
 import 'package:crypto/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class Crypto extends StatelessWidget {
   const Crypto({super.key});

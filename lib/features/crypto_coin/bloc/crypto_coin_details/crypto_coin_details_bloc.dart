@@ -2,6 +2,8 @@ import 'package:crypto/repositories/crypto_coins/abstract_coins_repository.dart'
 import 'package:crypto/repositories/crypto_coins/models/models.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:talker/talker.dart';
 
 part 'crypto_coin_details_event.dart';
 
@@ -28,8 +30,16 @@ class CryptoCoinDetailsBloc
           await coinsRepository.getCoinDetails(event.currencyCode);
 
       emit(CryptoCoinDetailsLoaded(coinDetails));
-    } catch (e) {
+    } catch (e, st) {
       emit(CryptoCoinDetailsFailure(e));
+      GetIt.I<Talker>().handle(e, st);
     }
+  }
+
+  @override
+  void onError(Object error, StackTrace stackTrace) {
+    super.onError(error, stackTrace);
+
+    GetIt.I<Talker>().handle(error, stackTrace);
   }
 }
