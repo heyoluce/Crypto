@@ -19,13 +19,18 @@ class MyHttpOverrides extends HttpOverrides {
   }
 }
 
-void main() {
+Future<void> main() async {
   final talker = Talker();
   GetIt.I.registerSingleton(talker);
   GetIt.I<Talker>().debug("Crypto application started!");
 
   FlutterError.onError =
       (details) => GetIt.I<Talker>().handle(details.exception, details.stack);
+
+  Bloc.observer = TalkerBlocObserver(
+      talker: talker,
+      settings: const TalkerBlocLoggerSettings(
+          printStateFullData: false, printEventFullData: false));
 
   final dio = Dio();
   dio.interceptors.add(
@@ -34,12 +39,14 @@ void main() {
         settings: const TalkerDioLoggerSettings(printResponseData: false)),
   );
 
-  GetIt.I.registerLazySingleton(() => CryptoCoinsRepository(dio: dio));
 
-  Bloc.observer = TalkerBlocObserver(
-      talker: talker,
-      settings: const TalkerBlocLoggerSettings(
-          printStateFullData: false, printEventFullData: false));
+
+
+  //final cryptoCoinsBox = await Hive.openBox<CryptoCoin>('crypto_coins_box');
+
+  GetIt.I.registerLazySingleton(
+      () => CryptoCoinsRepository(dio: dio));
+  //  cryptoCoinsBox: cryptoCoinsBox));
 
   HttpOverrides.global = MyHttpOverrides();
 

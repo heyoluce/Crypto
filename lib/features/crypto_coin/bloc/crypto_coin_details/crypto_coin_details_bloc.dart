@@ -4,7 +4,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:talker/talker.dart';
-
 part 'crypto_coin_details_event.dart';
 
 part 'crypto_coin_details_state.dart';

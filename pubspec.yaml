@@ -1,5 +1,5 @@
 name: crypto
-description: "Crypto currencies list application"
+description: " currencies list application"
 
 publish_to: 'none'
 
@@ -7,6 +7,7 @@ version: 3.0.0
 
 environment:
   sdk: '>=3.4.4 <4.0.0'
+
 
 
 dependencies:
@@ -33,8 +34,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
-  json_serializable: ^6.6.1
+  json_serializable: ^6.8.0
   build_runner: ^2.4.11
+
 
 
 
