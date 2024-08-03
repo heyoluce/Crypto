@@ -1,14 +1,14 @@
-import "package:crypto/repositories/crypto_coins/crypto_coins.dart";
+import "package:my_crypto_project/repositories/crypto_coins/crypto_coins.dart";
 import 'package:dio/dio.dart';
 
 class CryptoCoinsRepository implements AbstractCoinsRepository {
   CryptoCoinsRepository({
     required this.dio,
-  //  required this.cryptoCoinsBox,
+   // required this.cryptoCoinsBox,
   });
 
   final Dio dio;
- // final Box<CryptoCoin> cryptoCoinsBox;
+  //final Box<CryptoCoin> cryptoCoinsBox;
 
   @override
   Future<List<CryptoCoin>> getCoinsList() async {

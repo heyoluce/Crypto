@@ -1,18 +1,21 @@
 import 'dart:async';
 
-import 'package:crypto/features/crypto_list/bloc/crypto_list_bloc.dart';
-import 'package:crypto/features/crypto_list/widgets/widgets.dart';
+import 'package:auto_route/annotations.dart';
+import 'package:my_crypto_project/features/crypto_list/bloc/crypto_list_bloc.dart';
+import 'package:my_crypto_project/features/crypto_list/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:crypto/repositories/crypto_coins/crypto_coins.dart';
+import 'package:my_crypto_project/repositories/crypto_coins/crypto_coins.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
+@RoutePage()
 class CryptoListScreen extends StatefulWidget {
   const CryptoListScreen({super.key});
 
   @override
   State<CryptoListScreen> createState() => _CryptoListScreenState();
 }
+
 
 class _CryptoListScreenState extends State<CryptoListScreen> {
   final _cryptoListBloc = CryptoListBloc(GetIt.I<CryptoCoinsRepository>());

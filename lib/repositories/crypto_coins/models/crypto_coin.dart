@@ -1,6 +1,6 @@
-import 'package:crypto/repositories/crypto_coins/crypto_coins.dart';
+import 'package:my_crypto_project/repositories/crypto_coins/crypto_coins.dart';
 import 'package:equatable/equatable.dart';
-import 'package:crypto/repositories/crypto_coins/models/crypto_coin_details.dart';
+import 'package:my_crypto_project/repositories/crypto_coins/models/crypto_coin_details.dart';
 
 import 'crypto_coin_details.dart';
 
@@ -11,7 +11,9 @@ class CryptoCoin extends Equatable {
       required this.details}
       );
 
+
   final String name;
+
 
   final CryptoCoinDetail details;
 

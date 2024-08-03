@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:crypto/repositories/crypto_coins/crypto_coins.dart';
+import 'package:my_crypto_project/repositories/crypto_coins/crypto_coins.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,14 +39,13 @@ Future<void> main() async {
         settings: const TalkerDioLoggerSettings(printResponseData: false)),
   );
 
-
-
+  //await Hive.initFlutter();
 
   //final cryptoCoinsBox = await Hive.openBox<CryptoCoin>('crypto_coins_box');
 
   GetIt.I.registerLazySingleton(
       () => CryptoCoinsRepository(dio: dio));
-  //  cryptoCoinsBox: cryptoCoinsBox));
+  //cryptoCoinsBox: cryptoCoinsBox));
 
   HttpOverrides.global = MyHttpOverrides();
 

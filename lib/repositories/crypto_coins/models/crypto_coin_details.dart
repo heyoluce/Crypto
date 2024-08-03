@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'crypto_coin_details.g.dart';
 
+
 @JsonSerializable()
 class CryptoCoinDetail extends Equatable {
   const CryptoCoinDetail({
@@ -17,8 +18,10 @@ class CryptoCoinDetail extends Equatable {
   @JsonKey(name: "PRICE")
   final double priceInUSD;
 
+
   @JsonKey(name: "IMAGEURL")
   final String imageUrl;
+
 
   @JsonKey(name: "TOSYMBOL")
   final String toSymbol;
@@ -26,8 +29,10 @@ class CryptoCoinDetail extends Equatable {
   @JsonKey(name: "LASTUPDATE", toJson: _dateTimeToJson  , fromJson: _dateTimeFromJson)
   final DateTime lastUpdate;
 
+
   @JsonKey(name: "HIGH24HOUR")
   final double high24Hour;
+
 
   @JsonKey(name: "LOW24HOUR")
   final double low24Hour;
